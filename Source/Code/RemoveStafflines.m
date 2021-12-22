@@ -1,4 +1,4 @@
-function [result, stave_locs] = staff_lines(original_image, binarized_imgage)
+function [result, stave_locs] = RemoveStafflines(original_image, binarized_imgage)
     %% Filter peaks for stave lines
     % This piece of code was used from Andy Zeng, but it is edited in order to
     % identify more accurately the stave lines.

@@ -12,7 +12,7 @@ function main()
     % Binarizing Image
     binarized_image = ~(imbinarize(gray_image));
 
-    [image_without_stafflines, stave_locs] = staff_lines(original_image, binarized_image);
+    [image_without_stafflines, stave_locs] = RemoveStafflines(original_image, binarized_image);
     % figure, imshow(image_without_stafflines), title("After Stafflines Removal");
 
     % closed_image = perform_morphological(binarized_image_without_staff, 'close', 'disk', 7);
