@@ -11,24 +11,24 @@ produce the associated annotation, and implement a playback mechanism for the pa
 
 ***
 ## Overview
-<b> The process is broken down into the following tasks. </b>
+<b> The process is broken down into the following tasks: </b>
 
-**1. Staff Lines Detection and Removal** <br>
+**`1. Staff Lines Detection and Removal`** <br>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
      Detect the location of all staff lines and remove them to get the musical symbols.<br>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
      The staff lines location will be stored for Segmentation and Note Identification. <br>
-**2. Segmentation** <br>
+**`2. Segmentation`** <br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
      Perform segmentation to extract the individual symbol. <br> 
-**3. Symbol Recognition** <br>
+**`3. Symbol Recognition`** <br>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
      Perform template matching on each symbol to determine the musical notation. <br>
-**4. Note Identification** <br>
+**`4. Note Identification`** <br>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
      For each note, determine the pitch by comparing the symbol location and the staff lines location. <br>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
      Also determine the duration based on the result from Symbol Recognition. <br>
-**5. Music Transformation** <br> 
+**`5. Music Transformation`** <br> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
      Create a playable music based on the pitch and duration of the notes. <br>
