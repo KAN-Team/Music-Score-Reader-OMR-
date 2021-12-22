@@ -1,7 +1,14 @@
-function main()
+function Main()
 
-    clc; 
-    % reading image
+    clc;
+    %% Converting to segments...
+    % image = imread('Segments/Clef.tif');
+    % size(image)
+    % grayImage = rgb2gray(image);
+    % binarized = imbinarize(grayImage);
+    % imwrite(binarized, 'TEST_4.tif');
+    
+    %% reading image
     original_image = imread('JingleBells.bmp'); % TwinkleTwinkleLittleStar.bmp % JingleBells.bmp
 
     % Gray Image

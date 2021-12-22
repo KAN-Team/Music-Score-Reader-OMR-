@@ -9,13 +9,15 @@ function ProcessStaves(image_without_stafflines, stave_locs)
         line = line + 5;
     
         if (displayFigures == 1)
-            title = "Stave Section #" + stave;
-            figure('name', char(title));
+            title_ = "Stave Section #" + stave;
+            figure('name', char(title_));
             imshow(stave_section, 'InitialMagnification', 'fit');
         end
         
+        % figure, imshow(stave_section); title("Before Clef Deletion");
         RemoveClef(stave_section);
-    
+        
+        
     end
     
 end
