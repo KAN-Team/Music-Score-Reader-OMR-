@@ -1,4 +1,4 @@
-function RemoveClef(stave_section)
+function result = RemoveClef(stave_section)
 
      %% using fft technique...
      %% Fast-Fourier Transformation for the clef / Al-Moftah Al-Mosiqi
@@ -19,5 +19,5 @@ function RemoveClef(stave_section)
     for i = 1 : size(clef_h)
         stave_section(clef_h(i), clef_w(i)) = 0;
     end
-    figure, imshow(stave_section); title("After Clef Deletion");
+    result = stave_section;
 end
