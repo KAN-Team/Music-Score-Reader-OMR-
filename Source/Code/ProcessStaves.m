@@ -38,7 +38,9 @@ function ProcessStaves(image_without_stafflines, stave_locs)
         % Finding the stems from the vertical projection and deleting them
         [stave_section, res2, res3] = RemoveStems(stave_section, stave_height);
         
-        break;
+        % Removing dotted noise
+        % stave_section = RemoveDottedNotes(stave_section);
+        % break;
     end
     
 end
