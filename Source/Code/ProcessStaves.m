@@ -17,7 +17,6 @@ function ProcessStaves(image_without_stafflines, stave_locs)
         % figure, imshow(stave_section); title("Before Clef Deletion");
         stave_section = RemoveClef(stave_section);
         % figure, imshow(stave_section); title("After Clef Deletion");
-        
     end
     
 end
