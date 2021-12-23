@@ -1,5 +1,5 @@
 function Main()
-    clean all; clc;
+    clc;
     %% reading image
     original_image = imread('JingleBells.bmp'); % TwinkleTwinkleLittleStar.bmp % JingleBells.bmp
 

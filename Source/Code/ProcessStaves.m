@@ -33,8 +33,12 @@ function ProcessStaves(image_without_stafflines, stave_locs)
         end
         
         % Finding the bar positions
-        stave_section = RemoveBarLines(stave_section);
-%         break;
+        [stave_section, stave_height] = RemoveBarLines(stave_section);
+        
+        % Finding the stems from the vertical projection and deleting them
+        [stave_section, res2, res3] = RemoveStems(stave_section, stave_height);
+        
+        break;
     end
     
 end

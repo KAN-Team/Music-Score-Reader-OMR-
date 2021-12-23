@@ -1,4 +1,4 @@
-function result = RemoveBarLines(stave_section)
+function [result1, result2] = RemoveBarLines(stave_section)
 % @Author: Kareem Sherif / KAN Org...
 
     %% Finding the bar positions
@@ -23,11 +23,11 @@ function result = RemoveBarLines(stave_section)
         stave_section(:, bar_pos(i)) = 0;
     end
     clear i myVerticalProjection;
-    displayFigures = 1;
+    displayFigures = 0;
     if (displayFigures == 1)
         figure('name', 'The cropped stave without the bar lines');
         imshow(stave_section, 'InitialMagnification', 'fit');
     end
-    result = stave_section;
-
+    result1 = stave_section;
+    result2 = stave_height;
 end
