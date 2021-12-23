@@ -16,7 +16,14 @@ function ProcessStaves(image_without_stafflines, stave_locs)
         
         % figure, imshow(stave_section); title("Before Clef Deletion");
         stave_section = RemoveClef(stave_section);
-        % figure, imshow(stave_section); title("After Clef Deletion");
+        figure, imshow(stave_section); title("After Clef Deletion");
+        
+        % Fast-Fourier Transformation for the time signature (it is executed only in the first stave)
+        if (stave == 1)
+            [stave_section, rec_time_sig] = RemoveTimeSignature(stave_section);
+            figure, imshow(stave_section); title("After Time Signature Removal");
+        end
+        break;
     end
     
 end
