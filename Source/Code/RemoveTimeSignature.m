@@ -10,9 +10,10 @@ function [result, result2] = RemoveTimeSignature(stave_section)
     se = strel('square', 1);
     E = imdilate(D,se);
     [time_sig_H, time_sig_W] = find(E);
-    detected_time_sig_4_4 = [time_sig_H time_sig_W];
+    detected_time_sig = [time_sig_H time_sig_W];
  
-    if ~isempty(detected_time_sig_4_4)
+    recognisedTimeSignature = 0;
+    if ~isempty(detected_time_sig)
         TimeSignature = '4/4';
         clear time_sig_H time_sig_W;
         se = strel('disk', 5);
@@ -22,18 +23,18 @@ function [result, result2] = RemoveTimeSignature(stave_section)
             figure('name', 'Finding the time signature.');
             imshow(E, 'InitialMagnification','fit');
         end
-        detected_time_sig = detected_time_sig_4_4;
         clear time_sig_x time_sig_x_centred time_sig_y time_sig_y_centred C D E se thresh;
     end
     
     %% Deleting the time signature's pixels from the cropped stave
-    for i = detected_time_sig(1)-size(time_signature_img, 1) : detected_time_sig(1)
-        for j = 1 : detected_time_sig(2)
-            stave_section(i, j) = 0;
+    if ~isempty(detected_time_sig)
+        for i = detected_time_sig(1)-size(time_signature_img, 1) : detected_time_sig(1)
+            for j = 1 : detected_time_sig(2)
+                stave_section(i, j) = 0;
+            end
         end
+        recognisedTimeSignature = [num2cell(detected_time_sig) cellstr(TimeSignature)];
     end
-    
-    recognisedTimeSignature = [num2cell(detected_time_sig) cellstr(TimeSignature)];
     
     result = stave_section;
     result2 = recognisedTimeSignature;

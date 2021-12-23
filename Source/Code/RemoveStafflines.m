@@ -1,4 +1,4 @@
-function [result, stave_locs] = RemoveStafflines(original_image, binarized_imgage)
+function [result, stave_locs] = RemoveStafflines(binarized_imgage)
     %% Filter peaks for stave lines
     % This piece of code was used from Andy Zeng, but it is edited in order to
     % identify more accurately the stave lines.
@@ -8,20 +8,14 @@ function [result, stave_locs] = RemoveStafflines(original_image, binarized_imgag
     [stave_idx, stave_locs] = findpeaks(double(scan_filtered));
     clear scan_line scan_peak_thresh scan_filtered;
     
-%% Plotting the horizontal projection of the image
-    displayFigures = 0;
-    if displayFigures==1
-        figure('name', 'Horizontal Projection of the original image');
-        fill(sum(binarized_imgage, 2), 1:size(binarized_imgage, 1), 'r');
-        set(gca, 'Ydir', 'reverse');
-    end
     %% Visualizing the stave lines
-    if displayFigures==1
+    displayFigures = 0;
+    if (displayFigures == 1)
         figure('name', 'Visualizing the stave lines');
         imshow((binarized_imgage), 'InitialMagnification','fit');
         hold on;
         for i=1 : size(stave_idx)
-           plot([1; size(original_image, 2)], [stave_locs(i); stave_locs(i)], 'r');
+           plot([1; size(binarized_imgage, 2)], [stave_locs(i); stave_locs(i)], 'r');
         end
         clear i;
         hold off;
@@ -46,10 +40,9 @@ function [result, stave_locs] = RemoveStafflines(original_image, binarized_imgag
 
     clear i j tmp;
     
-    if displayFigures==1
-    figure('name', 'Removing the stave lines');
-    imshow((binarized_img_withoutlines), 'InitialMagnification', 'fit');
-    hold off;
+    if (displayFigures == 1)
+        figure('name', 'After Stafflines Removal');
+        imshow(binarized_img_withoutlines);
     end
     result = binarized_img_withoutlines;
 end
