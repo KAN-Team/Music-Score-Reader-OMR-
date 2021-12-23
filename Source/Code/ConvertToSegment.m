@@ -1,5 +1,5 @@
 function ConvertToSegment()
-%% Converting to segments...
+    %% Converting to segments...
     image = imread('Segments/a_temp.tiff');
     imshow(image);
     crop = imcrop;

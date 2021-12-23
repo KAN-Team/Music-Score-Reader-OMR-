@@ -1,5 +1,5 @@
 function Main()
-    clc;
+    clean all; clc;
     %% reading image
     original_image = imread('JingleBells.bmp'); % TwinkleTwinkleLittleStar.bmp % JingleBells.bmp
 
@@ -14,13 +14,11 @@ function Main()
     [image_without_stafflines, stave_locs] = RemoveStafflines(original_image, binarized_image);
     % figure, imshow(image_without_stafflines), title("After Stafflines Removal");
 
-    % closed_image = perform_morphological(binarized_image_without_staff, 'close', 'disk', 7);
-
-    % closed_image = imdilate(binarized_image_without_staff, strel('disk', 1));
-    % figure, imshow(closed_image), title("Dilated Image");
+    closed_image = perform_morphological(image_without_stafflines, 'close', 'disk', 1);
+    % figure, imshow(closed_image), title("After Closing Morph");
     %% Dividing the music score into staves and recognising them
 
-    ProcessStaves(image_without_stafflines, stave_locs);
+    ProcessStaves(closed_image, stave_locs);
 
     disp("Finished !");
 

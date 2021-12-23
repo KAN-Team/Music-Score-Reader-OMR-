@@ -1,5 +1,13 @@
 function ProcessStaves(image_without_stafflines, stave_locs)
-
+    %% Normalize Image
+    for i=1 : size(image_without_stafflines, 1)
+        for j=1 : 15
+            image_without_stafflines(i, j) = 0;
+            image_without_stafflines(i, size(image_without_stafflines, 2) - j + 1) = 0;
+        end
+    end
+    
+    %% Process
     stave_sections_distance = round((stave_locs(6)-stave_locs(5))/3);
     line = 1;
     displayFigures = 0;
@@ -16,14 +24,17 @@ function ProcessStaves(image_without_stafflines, stave_locs)
         
         % figure, imshow(stave_section); title("Before Clef Deletion");
         stave_section = RemoveClef(stave_section);
-        figure, imshow(stave_section); title("After Clef Deletion");
+        % figure, imshow(stave_section); title("After Clef Deletion");
         
         % Fast-Fourier Transformation for the time signature (it is executed only in the first stave)
         if (stave == 1)
             [stave_section, rec_time_sig] = RemoveTimeSignature(stave_section);
-            figure, imshow(stave_section); title("After Time Signature Removal");
+            % figure, imshow(stave_section); title("After Time Signature Removal");
         end
-        break;
+        
+        % Finding the bar positions
+        stave_section = RemoveBarLines(stave_section);
+%         break;
     end
     
 end
