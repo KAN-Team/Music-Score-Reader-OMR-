@@ -1,47 +1,26 @@
-function [result1, result2] = RemoveFilledNotehead(stave_section, stave_locs)
-    % @Author:  Kareem Sherif / KAN Org...
-    
-    %% Finding the filled note heads
+function [result, result2] = RemoveSemibreve(stave_section, stave_locs)
+    % @Author: Kareem Sherif / KAN Org...
+
+    %% Fast-Fourier Transformation for the semibreve notes
     % figure, imshow(stave_section); title("BEFORE");
-    stave_section = bwareaopen(stave_section, 15);
-    stave_section = perform_morphological(stave_section, 'close', 'square', 3);
-    [B, L] = bwboundaries(stave_section, 'noholes');
-    
-    stats = regionprops(L, 'Area', 'Centroid');
-    threshold = 0.79;
-    noteHeads = [];
+    semibreve_img = imread('Segments/Semibreve.tiff');
+    C = real(ifft2(fft2(stave_section) .* fft2(rot90(semibreve_img,2), size(stave_section,1), size(stave_section,2))));
+    % maxC = max(C(:)) % to determine threshold value...
+    thresh = 58;
+    D = C > thresh;
+    se = strel('square', 1);
+    E = imdilate(D, se);
+    [semibreve_note_H, semibreve_note_W] = find(E);
+    detected_semibreve_note = [semibreve_note_H semibreve_note_W];
+    semibreve_note_H_centred = detected_semibreve_note(:,1)-size(semibreve_img,1)/2-2;
+    semibreve_note_W_centred = detected_semibreve_note(:,2)-size(semibreve_img,2)/2;
+    detected_semibreve_note_centred = [semibreve_note_H_centred semibreve_note_W_centred];
+    detected_semibreve_note_centred = floor(detected_semibreve_note_centred);
 
-    % The following technique is based on a MATLAB's tutorial for 
-    % identifying the round objects.
+    clear semibreve_note_H semibreve_note_H_centred semibreve_note_W semibreve_note_W_centred C D E maxC se thresh;
 
-    for k = 1:length(B)
-
-        % obtain (X, Y) boundary coordinates corresponding to label 'k'
-        boundary = B{k};
-
-        % compute a simple estimate of the object's perimeter
-        delta_sq = diff(boundary) .^ 2;
-        perimeter = sum(sqrt(sum(delta_sq, 2)));
-
-        % obtain the area calculation corresponding to label 'k'
-        area = stats(k).Area;
-
-        % compute the roundness metric
-        metric = 4*pi*area / perimeter^2;
-
-        % mark objects above the threshold with a black circle
-        if metric > threshold
-            centroid = stats(k).Centroid;
-            noteHeads(end+1, :) = round(centroid);
-        end
-    end
-    clear k B L stats metric threshold centroid delta_sq area boundary perimeter;
-
-    %% Recognising the identified notes
-    %disp("stave_locs(1) = " + stave_locs(1));
-    %disp("stave_locs(2) = " + stave_locs(2));
-    %disp("stave_locs(1)-2*(stave_locs(2)-stave_locs(1)) = " + (stave_locs(1)-2*(stave_locs(2)-stave_locs(1))));
-    textCol = cell(size(noteHeads, 1), 2);
+    % Recognising the identified semibreve notes
+    textCol = cell(size(detected_semibreve_note_centred,1), 2);
     notePositions = [
                     stave_locs(1)-2*(stave_locs(2)-stave_locs(1)) ...
                     2*stave_locs(1)-stave_locs(2)-(stave_locs(2)-stave_locs(1))/2 ...
@@ -62,9 +41,9 @@ function [result1, result2] = RemoveFilledNotehead(stave_section, stave_locs)
                     stave_locs(5)+2*(stave_locs(5)-stave_locs(4)) ...
                     stave_locs(5)+2*(stave_locs(5)-stave_locs(4))+(stave_locs(5)-stave_locs(4))/2
                     ];
-    
-    for i=1 : size(noteHeads,1)
-        idx = knnsearch(notePositions(:), noteHeads(i,2));
+                
+    for i = 1 : size(detected_semibreve_note_centred, 1)
+        idx = knnsearch(notePositions(:), detected_semibreve_note_centred(i,1));
         switch idx
             case 1
                 textCol(i)={'6'}; textCol(i,2)={'C'};
@@ -104,23 +83,22 @@ function [result1, result2] = RemoveFilledNotehead(stave_section, stave_locs)
                 textCol(i)={'3'}; textCol(i,2)={'G'};
         end
     end
-    
-    recogniseNotes = [num2cell(noteHeads), textCol];
-    recogniseNotes = [recogniseNotes repmat({'0.25'}, size(recogniseNotes,1), 1)];
-    recogniseFilledNotes = sortrows(recogniseNotes, 1);
-    clear i textCol recogniseNotes notePositions idx;
+    recogniseSemibreveNotes = [num2cell(detected_semibreve_note_centred), textCol];
+    recogniseSemibreveNotes = [recogniseSemibreveNotes repmat({'1'}, size(recogniseSemibreveNotes,1),1)];
+    recogniseSemibreveNotes(:,[1 2]) = recogniseSemibreveNotes(:,[2 1]);
+    clear i textCol idx notePositions;
 
-    %% Deleting the recognised filled noteheads
-    for i=1 : size(noteHeads, 1)
-        for j = noteHeads(i,1)-10 : noteHeads(i,1)+10
-            for k = noteHeads(i,2)-5 : noteHeads(i,2)+5
-                stave_section(k, j) = 0;
+    %% Deleting the semibreve note pixels from the cropped stave
+    for i = 1 : size(detected_semibreve_note, 1)
+        for j = detected_semibreve_note(i,1)-size(semibreve_img,1) : detected_semibreve_note(i,1)
+            for k = detected_semibreve_note(i,2)-size(semibreve_img,2) : detected_semibreve_note(i,2)
+                stave_section(j, k) = 0;
             end
         end
     end
-    clear i j k;
-    
     % figure, imshow(stave_section); title("AFTER");
-    result1 = stave_section;
-    result2 = recogniseFilledNotes;
+    
+    clear i j k semibreve_note;
+    result = stave_section;
+    result2 = recogniseSemibreveNotes;
 end
