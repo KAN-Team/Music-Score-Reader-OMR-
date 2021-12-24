@@ -61,14 +61,15 @@ function ProcessStaves(binarized_image)
         [stave_section, res2, res3] = RemoveStems(stave_section, stave_height);
         % figure, imshow(stave_section); title("After Stems Removal");
         
-        % Removing dotted noise
-        % stave_section = RemoveDottedNotes(stave_section);
-        
         % Recognizing Semibreve note
         [stave_section, rec_semibreve] = RemoveSemibreve(stave_section, stave_section_locs);
         
         % Recognizing Filled head note
         [stave_section, rec_fillednote] = RemoveFilledNotehead(stave_section, stave_section_locs);
+        
+        % Recognizing Minims
+        [stave_section, rec_headsminim] = RemoveHeadsminim(stave_section, stave_section_locs);
+        
 %         break;
     end
     
