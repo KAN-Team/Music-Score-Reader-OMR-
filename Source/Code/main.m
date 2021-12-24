@@ -12,10 +12,10 @@ function Main()
     binarized_image = ~(imbinarize(gray_image));
     
     %% Dividing the music score into staves and recognising them
-    ProcessStaves(binarized_image);
+    recognizedScore = ProcessStaves(binarized_image);
     
     %% Reshaping the data and Creating the audio sample
-    % GenerateAudio();
+    GenerateAudio(recognizedScore);
     
     %%
     disp("Finished !");

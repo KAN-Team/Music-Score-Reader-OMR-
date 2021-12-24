@@ -1,4 +1,4 @@
-function ProcessStaves(binarized_image)
+function recognizedScore = ProcessStaves(binarized_image)
     %% Normalize Image
     for i=1 : size(binarized_image, 1)
         for j=1 : 15
@@ -14,6 +14,7 @@ function ProcessStaves(binarized_image)
     line = 1;
     recognizedScore = {};
     displayFigures = 0;
+    warning off;
     
     for stave = 1 : size(stave_locs, 1)/5
         stave_section = binarized_image(stave_locs(line) ...
