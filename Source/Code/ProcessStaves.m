@@ -14,7 +14,6 @@ function recognizedScore = ProcessStaves(binarized_image)
     line = 1;
     recognizedScore = {};
     displayFigures = 0;
-    warning off;
     
     for stave = 1 : size(stave_locs, 1)/5
         stave_section = binarized_image(stave_locs(line) ...
@@ -37,12 +36,13 @@ function recognizedScore = ProcessStaves(binarized_image)
         [stave_section, stave_section_locs] = RemoveStafflines(stave_section);
         
         % Closing Image
+        % figure, imshow(stave_section), title("Before Closing Morph");
         stave_section = perform_morphological(stave_section, 'close', 'disk', 1);
         % figure, imshow(stave_section), title("After Closing Morph");
         
-        % figure, imshow(stave_section); title("Before Clef Deletion");
+        % figure, imshow(stave_section); title("Before Clef Removal");
         stave_section = RemoveClef(stave_section);
-        % figure, imshow(stave_section); title("After Clef Deletion");
+        % figure, imshow(stave_section); title("After Clef Removal");
         
         % Fast-Fourier Transformation for the time signature (it is executed only in the first stave)
         if (stave == 1 || stave == 2)
@@ -65,18 +65,19 @@ function recognizedScore = ProcessStaves(binarized_image)
         
         % Recognizing Semibreve note
         [stave_section, rec_semibreve] = RemoveSemibreve(stave_section, stave_section_locs);
+        % figure, imshow(stave_section); title("After Semibreve Removal");
         
         % Recognizing Filled head note
         [stave_section, rec_fillednote] = RemoveFilledNotehead(stave_section, stave_section_locs);
+        % figure, imshow(stave_section); title("After Quarter note Removal");
         
         % Recognizing Minims
         [stave_section, rec_headsminim] = RemoveHeadsminim(stave_section, stave_section_locs);
+        % figure, imshow(stave_section); title("After Half note Removal");
         
         % Storing all the notes and their information
         recognizedScore = StoreNotesInfo(recognizedScore, stave, ...
                                         rec_semibreve, rec_fillednote, rec_headsminim);
-                                    
-        % break;
     end
     
 end

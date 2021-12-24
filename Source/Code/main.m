@@ -1,5 +1,6 @@
 function Main()
-    clc;
+    clc; clear; close all;
+    warning off;
     %% reading image
     original_image = imread('JingleBells.bmp'); % TwinkleTwinkleLittleStar.bmp % JingleBells.bmp
 
@@ -18,6 +19,9 @@ function Main()
     GenerateAudio(recognizedScore);
     
     %%
+    disp("====================================");
     disp("Finished !");
+    disp(" --> Go to 'TestCases' Folder and Play 'GeneratedAudio.wav'");
+    disp("====================================");
 end
 
