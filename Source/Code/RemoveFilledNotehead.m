@@ -1,14 +1,14 @@
-function [result1, result2] = RemoveFilledNotehead(stave_section)
+function [result1, result2] = RemoveFilledNotehead(stave_section, stave_locs)
     % @Author:  Kareem Sherif / KAN Org...
     
     %% Finding the filled note heads
-    % figure, imshow(stave_section); title("BEFORE");
+    figure, imshow(stave_section); title("BEFORE");
     stave_section = bwareaopen(stave_section, 15);
     stave_section = perform_morphological(stave_section, 'close', 'square', 3);
     [B, L] = bwboundaries(stave_section, 'noholes');
     
     stats = regionprops(L, 'Area', 'Centroid');
-    threshold = 0.39;
+    threshold = 0.80;
     noteHeads = [];
 
     % The following technique is based on a MATLAB's tutorial for 
@@ -38,85 +38,89 @@ function [result1, result2] = RemoveFilledNotehead(stave_section)
     clear k B L stats metric threshold centroid delta_sq area boundary perimeter;
 
     %% Recognising the identified notes
+    %disp("stave_locs(1) = " + stave_locs(1));
+    %disp("stave_locs(2) = " + stave_locs(2));
+    %disp("stave_locs(1)-2*(stave_locs(2)-stave_locs(1)) = " + (stave_locs(1)-2*(stave_locs(2)-stave_locs(1))));
     textCol = cell(size(noteHeads, 1), 2);
-%     notePositions=[stave_locs_cropped(1)-2*(stave_locs_cropped(2)-stave_locs_cropped(1)) ...
-%         2*stave_locs_cropped(1)-stave_locs_cropped(2)-(stave_locs_cropped(2)-stave_locs_cropped(1))/2 ...
-%         2*stave_locs_cropped(1)-stave_locs_cropped(2) ...
-%         stave_locs_cropped(1)-(stave_locs_cropped(2)-stave_locs_cropped(1))/2 ...
-%         stave_locs_cropped(1) ...
-%         stave_locs_cropped(1)+(stave_locs_cropped(2)-stave_locs_cropped(1))/2 ...
-%         stave_locs_cropped(2)...
-%         stave_locs_cropped(2)+(stave_locs_cropped(3)-stave_locs_cropped(2))/2 ...
-%         stave_locs_cropped(3)...
-%         stave_locs_cropped(3)+(stave_locs_cropped(4)-stave_locs_cropped(3))/2 ...
-%         stave_locs_cropped(4) ...
-%         stave_locs_cropped(4)+(stave_locs_cropped(5)-stave_locs_cropped(4))/2 ...
-%         stave_locs_cropped(5) ...
-%         stave_locs_cropped(5)+(stave_locs_cropped(5)-stave_locs_cropped(4))/2 ...
-%         2*stave_locs_cropped(5)-stave_locs_cropped(4) ...
-%         (2*stave_locs_cropped(5)-stave_locs_cropped(4))+(stave_locs_cropped(5)-stave_locs_cropped(4))/2 ...
-%         stave_locs_cropped(5)+2*(stave_locs_cropped(5)-stave_locs_cropped(4)) ...
-%         stave_locs_cropped(5)+2*(stave_locs_cropped(5)-stave_locs_cropped(4))+(stave_locs_cropped(5)-stave_locs_cropped(4))/2
-%         ];
-%     
-%     for i=1:size(noteHeads,1)
-%         idx=knnsearch(notePositions(:),noteHeads(i,2));
-%         switch idx
-%             case 1
-%                 textCol(i)={'6'}; textCol(i,2)={'C'};
-%             case 2
-%                 textCol(i)={'5'}; textCol(i,2)={'B'};
-%             case 3
-%                 textCol(i)={'5'}; textCol(i,2)={'A'};
-%             case 4
-%                 textCol(i)={'5'}; textCol(i,2)={'G'};
-%             case 5
-%                 textCol(i)={'5'}; textCol(i,2)={'F'};
-%             case 6
-%                 textCol(i)={'5'}; textCol(i,2)={'E'};
-%             case 7
-%                 textCol(i)={'5'}; textCol(i,2)={'D'};
-%             case 8
-%                 textCol(i)={'5'}; textCol(i,2)={'C'};
-%             case 9
-%                 textCol(i)={'4'};  textCol(i,2)={'B'};
-%             case 10
-%                 textCol(i)={'4'};  textCol(i,2)={'A'};
-%             case 11
-%                 textCol(i)={'4'}; textCol(i,2)={'G'};
-%             case 12
-%                 textCol(i)={'4'};  textCol(i,2)={'F'};
-%             case 13
-%                 textCol(i)={'4'};  textCol(i,2)={'E'};
-%             case 14
-%                 textCol(i)={'4'}; textCol(i,2)={'D'};
-%             case 15
-%                 textCol(i)={'4'}; textCol(i,2)={'C'};
-%             case 16
-%                 textCol(i)={'3'}; textCol(i,2)={'B'};
-%             case 17
-%                 textCol(i)={'3'}; textCol(i,2)={'A'};
-%             case 18
-%                 textCol(i)={'3'}; textCol(i,2)={'G'};
-%         end
-%     end
-%     
-%     recogniseNotes = [num2cell(noteHeads),textCol];
-%     recogniseNotes=[recogniseNotes repmat({'0.25'},size(recogniseNotes,1),1)];
-%     recogniseFilledNotes = sortrows(recogniseNotes, 1);
-%     clear i textCol recogniseNotes notePositions idx;
-% 
-%     %% Deleting the recognised filled noteheads
-%     for i=1:size(noteHeads,1)
-%         for j=noteHeads(i,1)-25:noteHeads(i,1)+25
-%             for k=noteHeads(i,2)-15:noteHeads(i,2)+15
-%                 stave_section(k,j)=0;
-%             end
-%         end
-%     end
-%     figure, imshow(stave_section); title("AFTER");
-%     clear i j k;
+    notePositions = [
+                    stave_locs(1)-2*(stave_locs(2)-stave_locs(1)) ...
+                    2*stave_locs(1)-stave_locs(2)-(stave_locs(2)-stave_locs(1))/2 ...
+                    2*stave_locs(1)-stave_locs(2) ...
+                    stave_locs(1)-(stave_locs(2)-stave_locs(1))/2 ...
+                    stave_locs(1) ...
+                    stave_locs(1)+(stave_locs(2)-stave_locs(1))/2 ...
+                    stave_locs(2)...
+                    stave_locs(2)+(stave_locs(3)-stave_locs(2))/2 ...
+                    stave_locs(3)...
+                    stave_locs(3)+(stave_locs(4)-stave_locs(3))/2 ...
+                    stave_locs(4) ...
+                    stave_locs(4)+(stave_locs(5)-stave_locs(4))/2 ...
+                    stave_locs(5) ...
+                    stave_locs(5)+(stave_locs(5)-stave_locs(4))/2 ...
+                    2*stave_locs(5)-stave_locs(4) ...
+                    (2*stave_locs(5)-stave_locs(4))+(stave_locs(5)-stave_locs(4))/2 ...
+                    stave_locs(5)+2*(stave_locs(5)-stave_locs(4)) ...
+                    stave_locs(5)+2*(stave_locs(5)-stave_locs(4))+(stave_locs(5)-stave_locs(4))/2
+                    ];
     
+    for i=1 : size(noteHeads,1)
+        idx = knnsearch(notePositions(:), noteHeads(i,2));
+        switch idx
+            case 1
+                textCol(i)={'6'}; textCol(i,2)={'C'};
+            case 2
+                textCol(i)={'5'}; textCol(i,2)={'B'};
+            case 3
+                textCol(i)={'5'}; textCol(i,2)={'A'};
+            case 4
+                textCol(i)={'5'}; textCol(i,2)={'G'};
+            case 5
+                textCol(i)={'5'}; textCol(i,2)={'F'};
+            case 6
+                textCol(i)={'5'}; textCol(i,2)={'E'};
+            case 7
+                textCol(i)={'5'}; textCol(i,2)={'D'};
+            case 8
+                textCol(i)={'5'}; textCol(i,2)={'C'};
+            case 9
+                textCol(i)={'4'};  textCol(i,2)={'B'};
+            case 10
+                textCol(i)={'4'};  textCol(i,2)={'A'};
+            case 11
+                textCol(i)={'4'}; textCol(i,2)={'G'};
+            case 12
+                textCol(i)={'4'};  textCol(i,2)={'F'};
+            case 13
+                textCol(i)={'4'};  textCol(i,2)={'E'};
+            case 14
+                textCol(i)={'4'}; textCol(i,2)={'D'};
+            case 15
+                textCol(i)={'4'}; textCol(i,2)={'C'};
+            case 16
+                textCol(i)={'3'}; textCol(i,2)={'B'};
+            case 17
+                textCol(i)={'3'}; textCol(i,2)={'A'};
+            case 18
+                textCol(i)={'3'}; textCol(i,2)={'G'};
+        end
+    end
+    
+    recogniseNotes = [num2cell(noteHeads), textCol];
+    recogniseNotes = [recogniseNotes repmat({'0.25'}, size(recogniseNotes,1), 1)];
+    recogniseFilledNotes = sortrows(recogniseNotes, 1);
+    clear i textCol recogniseNotes notePositions idx;
+
+    %% Deleting the recognised filled noteheads
+    for i=1 : size(noteHeads, 1)
+        for j = noteHeads(i,1)-10 : noteHeads(i,1)+10
+            for k = noteHeads(i,2)-5 : noteHeads(i,2)+5
+                stave_section(k, j) = 0;
+            end
+        end
+    end
+    clear i j k;
+    
+    figure, imshow(stave_section); title("AFTER");
     result1 = stave_section;
     result2 = recogniseFilledNotes;
 end
