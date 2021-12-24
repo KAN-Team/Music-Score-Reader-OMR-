@@ -12,6 +12,7 @@ function ProcessStaves(binarized_image)
     %% Process
     stave_sections_distance = round((stave_locs(6)-stave_locs(5))/3);
     line = 1;
+    recognizedScore = {};
     displayFigures = 0;
     
     for stave = 1 : size(stave_locs, 1)/5
@@ -70,7 +71,11 @@ function ProcessStaves(binarized_image)
         % Recognizing Minims
         [stave_section, rec_headsminim] = RemoveHeadsminim(stave_section, stave_section_locs);
         
-%         break;
+        % Storing all the notes and their information
+        recognizedScore = StoreNotesInfo(recognizedScore, stave, ...
+                                        rec_semibreve, rec_fillednote, rec_headsminim);
+                                    
+        % break;
     end
     
 end

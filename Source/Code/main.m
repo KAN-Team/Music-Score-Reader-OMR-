@@ -13,6 +13,11 @@ function Main()
     
     %% Dividing the music score into staves and recognising them
     ProcessStaves(binarized_image);
+    
+    %% Reshaping the data and Creating the audio sample
+    % GenerateAudio();
+    
+    %%
     disp("Finished !");
 end
 
