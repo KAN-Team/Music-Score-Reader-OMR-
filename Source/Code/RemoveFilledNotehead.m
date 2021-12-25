@@ -3,12 +3,14 @@ function [result1, result2] = RemoveFilledNotehead(stave_section, stave_locs)
     
     %% Finding the filled note heads
     % figure, imshow(stave_section); title("BEFORE");
+    stave_section = imclose(stave_section, strel('disk', 1));
     stave_section = bwareaopen(stave_section, 15);
     stave_section = perform_morphological(stave_section, 'close', 'square', 3);
+    
     [B, L] = bwboundaries(stave_section, 'noholes');
     
     stats = regionprops(L, 'Area', 'Centroid');
-    threshold = 0.79;
+    threshold = 0.74; % First was 0.79
     noteHeads = [];
 
     % The following technique is based on a MATLAB's tutorial for 

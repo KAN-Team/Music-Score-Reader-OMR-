@@ -69,8 +69,8 @@ function recognizedScore = ProcessStaves(binarized_image)
         
         % Recognizing Filled head note
         [stave_section, rec_fillednote] = RemoveFilledNotehead(stave_section, stave_section_locs);
-        % figure, imshow(stave_section); title("After Quarter note Removal");
-        
+         %figure, imshow(stave_section); title("After Quarter note Removal");
+         
         % Recognizing Minims
         [stave_section, rec_headsminim] = RemoveHeadsminim(stave_section, stave_section_locs);
         % figure, imshow(stave_section); title("After Half note Removal");

@@ -3,7 +3,8 @@ function [result, result2] = RemoveHeadsminim(stave_section, stave_locs)
 
     %% Recognising the minim noteheads
     % figure, imshow(stave_section); title("BEFORE");
-    stave_section = perform_morphological(stave_section, 'close', 'disk', 8);
+    stave_section = perform_morphological(stave_section, 'close', 'disk', 5);
+    stave_section = imclose(stave_section, strel('disk', 3));
     %% Finding the minim note heads
     [B, L] = bwboundaries(stave_section, 'noholes');
 
