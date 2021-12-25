@@ -1,23 +1,36 @@
 function recognizedScore = ProcessStaves(binarized_image)
-    %% Normalize Image
-    for i=1 : size(binarized_image, 1)
-        for j=1 : 15
-            binarized_image(i, j) = 0;
-            binarized_image(i, size(binarized_image, 2) - j + 1) = 0;
-        end
-    end
+    %{
+      PROCESS_STAVES Applying Pre-processing on the binarized image.
+        Starts by removing unwanted margins, and splitting image into 
+        a number of equal sections, then begins to detect Staff Lines, 
+        Clef, Time Signature, Bar Lines, Stem Notes, Semibreve Notes, 
+        Quarter Notes and Half Notes. 
+        
+        After Recognizing all of the above, it returns 'recognizedScore'
+        a 2D matrix containing all the score sheet info ready to generate
+        the proper audio file.
+        
+        @Author Kareem Sherif
+        @Copyright 12-2021 The KAN, Org.
+    %}
+
+    %% Normalizing Image
     
-    stave_locs = DetectStafflines(binarized_image);
+    % Removing small Margins from right and left sides
+    binarized_image = RemoveMargins(binarized_image);
     
-    %% Process
-    stave_sections_distance = round((stave_locs(6)-stave_locs(5))/3);
+    % Gets the locations of the horizontal stave lines
+    stafflines_locs = DetectStafflines(binarized_image);
+    
+    %% Processing
+    stave_sections_distance = round((stafflines_locs(6)-stafflines_locs(5))/3);
     line = 1;
     recognizedScore = {};
     displayFigures = 0;
     
-    for stave = 1 : size(stave_locs, 1)/5
-        stave_section = binarized_image(stave_locs(line) ...
-                      - stave_sections_distance : stave_locs(5*stave) ...
+    for stave = 1 : size(stafflines_locs, 1)/5
+        stave_section = binarized_image(stafflines_locs(line) ...
+                      - stave_sections_distance : stafflines_locs(5*stave) ...
                       + stave_sections_distance, 1:size(binarized_image,2));
                   
         line = line + 5;
@@ -79,5 +92,4 @@ function recognizedScore = ProcessStaves(binarized_image)
         recognizedScore = StoreNotesInfo(recognizedScore, stave, ...
                                         rec_semibreve, rec_fillednote, rec_headsminim);
     end
-    
 end

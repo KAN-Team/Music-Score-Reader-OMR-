@@ -1,10 +1,14 @@
 function Main()
+    %% Tidying up
     clc; clear; close all;
     warning off;
-    %% reading image
+    global display_figures
+    display_figures = false;
+    
+    %% Reading Image
     original_image = imread('JingleBells.bmp'); % TwinkleTwinkleLittleStar.bmp % JingleBells.bmp
 
-    % Gray Image
+    % Greying Image
     if (ndims(original_image) == 3)
         gray_image = rgb2gray(original_image);
     end
@@ -18,7 +22,7 @@ function Main()
     %% Reshaping the data and Creating the audio sample
     GenerateAudio(recognizedScore);
     
-    %%
+    %% Finale
     disp("====================================");
     disp("Finished !");
     disp(" --> Go to 'TestCases' Folder and Play 'GeneratedAudio.wav'");
