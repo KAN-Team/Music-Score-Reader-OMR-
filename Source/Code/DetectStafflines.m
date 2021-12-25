@@ -17,7 +17,7 @@ function peak_locs = DetectStafflines(binarized_image)
     %% Visualizing the stave lines
     global display_figures
     if (display_figures)
-        figure_display('Detection', binarized_image, 'Detected Staff Lines');
+        figure_display('DETECTION', binarized_image, char("Detected Staff Lines"));
         hold on;
         for i=1 : size(peak_val)
            plot([1; size(binarized_image, 2)], [peak_locs(i); peak_locs(i)], 'r');

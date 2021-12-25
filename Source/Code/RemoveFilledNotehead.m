@@ -5,7 +5,7 @@ function [result1, result2] = RemoveFilledNotehead(stave_section, stave_locs)
     % figure, imshow(stave_section); title("BEFORE");
     stave_section = imclose(stave_section, strel('disk', 1));
     stave_section = bwareaopen(stave_section, 15);
-    stave_section = perform_morphological(stave_section, 'close', 'square', 3);
+    stave_section = apply_morphological(stave_section, 'close', 'square', 3);
     
     [B, L] = bwboundaries(stave_section, 'noholes');
     

@@ -19,47 +19,44 @@ function recognizedScore = ProcessStaves(binarized_image)
     % Removing small Margins from right and left sides
     binarized_image = RemoveMargins(binarized_image);
     
-    % Gets the locations of the horizontal stave lines
+    % Getting the locations of the horizontal stave lines
     stafflines_locs = DetectStafflines(binarized_image);
     
     %% Processing
-    stave_sections_distance = round((stafflines_locs(6)-stafflines_locs(5))/3);
-    line = 1;
+    global display_figures stave
+    stave_section_space = round((stafflines_locs(6)-stafflines_locs(5))/3);
+    staffline = 1;
     recognizedScore = {};
-    displayFigures = 0;
     
-    for stave = 1 : size(stafflines_locs, 1)/5
-        stave_section = binarized_image(stafflines_locs(line) ...
-                      - stave_sections_distance : stafflines_locs(5*stave) ...
-                      + stave_sections_distance, 1:size(binarized_image,2));
+    for stave = 1 : size(stafflines_locs, 1)/5  % foreach section
+        stave_section = binarized_image(stafflines_locs(staffline) ...
+                      - stave_section_space : stafflines_locs(5*stave) ...
+                      + stave_section_space, 1:size(binarized_image,2));
                   
-        line = line + 5;
+        staffline = staffline + 5;
         
+        % Checking wheather this section contains notes or not.
         if ~ContainsNotes(stave_section)
             continue;
         end
        
-        if (displayFigures == 1)
-            title_ = "Stave Section #" + stave;
-            figure('name', char(title_));
-            imshow(stave_section, 'InitialMagnification', 'fit');
+        % Displaying current section before any pre-process.
+        if (display_figures)
+            figure_display('VISUALIZATION', stave_section, char("Stave Section #" + stave));
         end
         
-        % Removing horizontal stave lines
-        [stave_section, stave_section_locs] = RemoveStafflines(stave_section);
+        % Detecting and Removing staff lines.
+        [stave_section, section_stafflines_locs] = HandleStafflines(stave_section);
         
-        % Closing Image
-        % figure, imshow(stave_section), title("Before Closing Morph");
-        stave_section = perform_morphological(stave_section, 'close', 'disk', 1);
-        % figure, imshow(stave_section), title("After Closing Morph");
+        % Applying Morphological closing.
+        stave_section = apply_morphological(stave_section, 'close', 'disk', 1);
         
-        % figure, imshow(stave_section); title("Before Clef Removal");
-        stave_section = RemoveClef(stave_section);
-        % figure, imshow(stave_section); title("After Clef Removal");
+        % Detecting and Removing clef.
+        stave_section = HandleClef(stave_section);
         
-        % Fast-Fourier Transformation for the time signature (it is executed only in the first stave)
+        % Detecting and Removing the time signature (it exists only in the first stave).
         if (stave == 1 || stave == 2)
-            [stave_section, time_sig] = RemoveTimeSignature(stave_section);
+            [stave_section, time_sig] = HandleTimeSignature(stave_section);
             if size(time_sig) ~= 0
                 rec_time_sig = time_sig;
             end
@@ -77,15 +74,15 @@ function recognizedScore = ProcessStaves(binarized_image)
         % figure, imshow(stave_section); title("After Stems Removal");
         
         % Recognizing Semibreve note
-        [stave_section, rec_semibreve] = RemoveSemibreve(stave_section, stave_section_locs);
+        [stave_section, rec_semibreve] = RemoveSemibreve(stave_section, section_stafflines_locs);
         % figure, imshow(stave_section); title("After Semibreve Removal");
         
         % Recognizing Filled head note
-        [stave_section, rec_fillednote] = RemoveFilledNotehead(stave_section, stave_section_locs);
+        [stave_section, rec_fillednote] = RemoveFilledNotehead(stave_section, section_stafflines_locs);
          %figure, imshow(stave_section); title("After Quarter note Removal");
          
         % Recognizing Minims
-        [stave_section, rec_headsminim] = RemoveHeadsminim(stave_section, stave_section_locs);
+        [stave_section, rec_headsminim] = RemoveHeadsminim(stave_section, section_stafflines_locs);
         % figure, imshow(stave_section); title("After Half note Removal");
         
         % Storing all the notes and their information
