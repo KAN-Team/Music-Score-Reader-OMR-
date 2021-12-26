@@ -75,7 +75,7 @@ function recognizedScore = ProcessStaves(binarized_image)
         [~, recg_minims] = HandleMinims(stave_section, section_stafflines_locs);
         
         % Storing all the notes and their information
-        recognizedScore = StoreNotesInfo(recognizedScore, stave, ...
-                                        recg_semibreve, recg_crotchets, recg_minims);
+        recognizedScore = StoreNotesInfo(recognizedScore, recg_semibreve, ...
+                                         recg_crotchets, recg_minims);
     end
 end

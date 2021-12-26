@@ -64,9 +64,9 @@ function [result1, result2] = HandleCrotchets(stave_section, stafflines_locs)
     %% Recognising the identified crotchet notes
     notations = RecognizeNotes(crotchets, stafflines_locs, 2);
     
-    recogniseNotes = [num2cell(crotchets), notations];
-    recogniseNotes = [recogniseNotes repmat({'0.25'}, size(recogniseNotes,1), 1)];
-    recogniseFilledNotes = sortrows(recogniseNotes, 1);
+    recognizedNotes = [num2cell(crotchets), notations];
+    recognizedNotes = [recognizedNotes repmat({'0.25'}, size(recognizedNotes,1), 1)];
+    recogniseFilledNotes = sortrows(recognizedNotes, 1);
 
     %% Removing the recognised crotchets filled note heads
     for i=1 : size(crotchets, 1)    % foreach Crotchet
