@@ -1,6 +1,8 @@
 function [binarized_img_withoutlines, stafflines_locs] = HandleStafflines(stave_section)
     %{
       HANDLE_STAFFLINES Detects and Removes musical staff lines.
+        Detection is applied using Horizontal Projection Profile.
+        
         It returns the binarized image without the staff lines and
         the staff lines locations in the specified section. 
 

@@ -60,18 +60,13 @@ function recognizedScore = ProcessStaves(binarized_image)
             if size(time_sig) ~= 0
                 rec_time_sig = time_sig;
             end
-            % figure, imshow(stave_section); title("After Time Signature Removal");
         end
         
-        % Finding the bar positions
-        % figure, imshow(stave_section); title("Before Barlines Removal");
-        [stave_section, stave_height] = RemoveBarLines(stave_section);
-        % figure, imshow(stave_section); title("After Barlines Removal");
+        % Detecting and Removing bar lines.
+        [stave_section, dis_btw_2_stv_lines] = HandleBarLines(stave_section);
         
-        % Finding the stems from the vertical projection and deleting them
-        % figure, imshow(stave_section); title("Before Stems Removal");
-        [stave_section, res2, res3] = RemoveStems(stave_section, stave_height);
-        % figure, imshow(stave_section); title("After Stems Removal");
+        % Detecting and Removing notes' stems.
+        [stave_section] = HandleStems(stave_section, dis_btw_2_stv_lines);
         
         % Recognizing Semibreve note
         [stave_section, rec_semibreve] = RemoveSemibreve(stave_section, section_stafflines_locs);

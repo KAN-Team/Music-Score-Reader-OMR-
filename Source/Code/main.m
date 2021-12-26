@@ -18,6 +18,7 @@ function Main()
     
     %% Dividing the music score into staves and recognising them
     recognizedScore = ProcessStaves(binarized_image);
+    set(0, 'Children', flipud(get(0, 'Children'))) % Reverse Figure Window Order
     
     %% Reshaping the data and Creating the audio sample
     GenerateAudio(recognizedScore);
