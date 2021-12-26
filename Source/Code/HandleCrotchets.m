@@ -22,7 +22,7 @@ function [result1, result2] = HandleCrotchets(stave_section, stafflines_locs)
         and the recognized Crotchet object containing 5 cols,
         the first 2 are for the location, the third is for 
         the pitch interval, the fourth is the ABC notation, 
-        the fifth is ones for predicting a quarter note.
+        the fifth is ones for predicting a quarter note duration.
 
         @Author Kareem Sherif
         @Copyright 12-2021 The KAN, Org.
