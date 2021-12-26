@@ -56,10 +56,7 @@ function recognizedScore = ProcessStaves(binarized_image)
         
         % Detecting and Removing the time signature (it exists only in the first stave).
         if (stave == 1 || stave == 2)
-            [stave_section, time_sig] = HandleTimeSignature(stave_section);
-            if size(time_sig) ~= 0
-                rec_time_sig = time_sig;
-            end
+            [stave_section, ~] = HandleTimeSignature(stave_section);
         end
         
         % Detecting and Removing bar lines.
@@ -69,17 +66,16 @@ function recognizedScore = ProcessStaves(binarized_image)
         [stave_section] = HandleStems(stave_section, dis_btw_2_stv_lines);
         
         % Recognizing Whole Notes
-        [stave_section, rec_semibreve] = HandleSemibreve(stave_section, section_stafflines_locs);
+        [stave_section, recg_semibreve] = HandleSemibreve(stave_section, section_stafflines_locs);
         
         % Recognizing Quarter Notes
-        [stave_section, rec_fillednote] = HandleCrotchets(stave_section, section_stafflines_locs);
+        [stave_section, recg_crotchets] = HandleCrotchets(stave_section, section_stafflines_locs);
          
         % Recognizing Half Notes
-        [stave_section, rec_headsminim] = RemoveHeadsminim(stave_section, section_stafflines_locs);
-        % figure, imshow(stave_section); title("After Half note Removal");
+        [~, recg_minims] = HandleMinims(stave_section, section_stafflines_locs);
         
         % Storing all the notes and their information
         recognizedScore = StoreNotesInfo(recognizedScore, stave, ...
-                                        rec_semibreve, rec_fillednote, rec_headsminim);
+                                        recg_semibreve, recg_crotchets, recg_minims);
     end
 end

@@ -1,6 +1,6 @@
 function [result1, result2] = HandleCrotchets(stave_section, stafflines_locs)
     %{
-      HANDLE_CROTCHETS Detects, Recognizes and Removes musical filled heads.
+      HANDLE_CROTCHETS Detects, Recognizes and Removes musical Crotchets.
         Crotchet is also known as a 'Quarter Note'.
         
         It takes the stave_section image 
@@ -68,7 +68,7 @@ function [result1, result2] = HandleCrotchets(stave_section, stafflines_locs)
     recogniseNotes = [recogniseNotes repmat({'0.25'}, size(recogniseNotes,1), 1)];
     recogniseFilledNotes = sortrows(recogniseNotes, 1);
 
-    %% Removing the recognised filled noteheads
+    %% Removing the recognised crotchets filled note heads
     for i=1 : size(crotchets, 1)    % foreach Crotchet
         for j = crotchets(i,1)-10 : crotchets(i,1)+10
             for k = crotchets(i,2)-5 : crotchets(i,2)+5
