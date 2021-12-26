@@ -3,7 +3,7 @@ function Main()
     clc; clear; close all;
     warning off;
     global display_figures
-    display_figures = true;
+    display_figures = false;
     
     %% Reading Image
     original_image = imread('JingleBells.bmp'); % TwinkleTwinkleLittleStar.bmp % JingleBells.bmp
