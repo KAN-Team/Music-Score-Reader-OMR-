@@ -68,20 +68,20 @@ function recognizedScore = ProcessStaves(binarized_image)
         % Detecting and Removing notes' stems.
         [stave_section] = HandleStems(stave_section, dis_btw_2_stv_lines);
         
-        % Recognizing Semibreve note
-        [stave_section, rec_semibreve] = RemoveSemibreve(stave_section, section_stafflines_locs);
-        % figure, imshow(stave_section); title("After Semibreve Removal");
+        % Recognizing Whole Note
+        [stave_section, rec_semibreve] = HandleSemibreve(stave_section, section_stafflines_locs);
         
-        % Recognizing Filled head note
+        % Recognizing Quarter Note
         [stave_section, rec_fillednote] = RemoveFilledNotehead(stave_section, section_stafflines_locs);
          %figure, imshow(stave_section); title("After Quarter note Removal");
          
-        % Recognizing Minims
+        % Recognizing Half Note
         [stave_section, rec_headsminim] = RemoveHeadsminim(stave_section, section_stafflines_locs);
         % figure, imshow(stave_section); title("After Half note Removal");
         
         % Storing all the notes and their information
         recognizedScore = StoreNotesInfo(recognizedScore, stave, ...
                                         rec_semibreve, rec_fillednote, rec_headsminim);
+                                    %break;
     end
 end
