@@ -6,7 +6,7 @@ function [binarized_img_withoutlines, stafflines_locs] = HandleStafflines(stave_
         It returns the binarized image without the staff lines and
         the staff lines locations in the specified section. 
 
-        @Author Kareem Sherif
+        @Author Nada Anies
         @Copyright 12-2021 The KAN, Org.
     %}
 

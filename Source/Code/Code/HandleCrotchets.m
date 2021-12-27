@@ -24,7 +24,7 @@ function [result1, result2] = HandleCrotchets(stave_section, stafflines_locs)
         the pitch interval, the fourth is the ABC notation, 
         the fifth is ones for predicting a quarter note duration.
 
-        @Author Kareem Sherif
+        @Author Abanoub Asaad
         @Copyright 12-2021 The KAN, Org.
     %}
     

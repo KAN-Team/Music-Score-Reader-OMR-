@@ -7,7 +7,7 @@ function [result1, result2, result3] = HandleStems(stave_section, dis_btw_2_stv_
         the distance between any two consecutive staff lines 
         in the same section. 
 
-        @Author Kareem Sherif
+        @Author Nada Anies
         @Copyright 12-2021 The KAN, Org.
     %}
 
