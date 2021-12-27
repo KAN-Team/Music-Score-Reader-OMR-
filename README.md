@@ -5,12 +5,18 @@ An accessible and easy-to-use OMR application could provide an amazing tool for 
 For example, a novice musician could use such a tool to hear what a selected piece of music should sound like.
 
 Ideally, an OMR, given an image of a simple or complex music sheet, automatically identifies the notes and plays the musical piece. <br>
-For this project, our goal is to develop an algorithm to parse music sheet images, <br>
-produce the associated annotation, and implement a playback mechanism for the parsed musical notes.
+For this project, the goal is to develop an algorithm to parse music sheet images, <br>
+produce the associated annotation, and implement a playback mechanism for the parsed musical notes. <br>
+Also handles the orientated images.
 
 ***
 ## Process Overview
 <b> The process is broken down into the following tasks: </b>
+
+**`0. Preparations for the Process`** <br>
+- Detect the image orientation.
+- Remove unwanted margins.
+- Getting number of staves.
 
 **`1. Staff Lines Detection and Removal`** <br>
 - Detect the location of all staff lines.
@@ -24,7 +30,7 @@ produce the associated annotation, and implement a playback mechanism for the pa
 
 **`3. Symbol Recognition`** <br>
 - Calculate matching score against each training data.
-- Minimum score threshold: 80%.
+- Minimum score threshold: **74%**.
 - Pick a label with a maximum score.
 
 **`4. Note Identification`** <br>
