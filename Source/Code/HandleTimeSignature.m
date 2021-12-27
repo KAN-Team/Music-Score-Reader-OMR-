@@ -34,7 +34,11 @@ function [result, result2] = HandleTimeSignature(stave_section)
                 stave_section(i, j) = 0;
             end
         end
-        recognisedTimeSignature = [num2cell(detected_time_sig) cellstr(TimeSignature)];
+        try
+            recognisedTimeSignature = [num2cell(detected_time_sig) cellstr(TimeSignature)];
+        catch
+            recognisedTimeSignature = 'NA';
+        end
     end
     
     result = stave_section;

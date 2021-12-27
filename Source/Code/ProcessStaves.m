@@ -1,4 +1,4 @@
-function recognizedScore = ProcessStaves(binarized_image)
+function recognizedScore = ProcessStaves(gray_image)
     %{
       PROCESS_STAVES Applying Pre-processing on the binarized image.
         Starts by removing unwanted margins, and splitting image into 
@@ -15,6 +15,9 @@ function recognizedScore = ProcessStaves(binarized_image)
     %}
 
     %% Normalizing Image
+    
+    % Detecting rotational image and fixes it.
+    binarized_image = HandleRotation(gray_image);
     
     % Removing small Margins from right and left sides
     binarized_image = RemoveMargins(binarized_image);
@@ -78,4 +81,5 @@ function recognizedScore = ProcessStaves(binarized_image)
         recognizedScore = StoreNotesInfo(recognizedScore, recg_semibreve, ...
                                          recg_crotchets, recg_minims);
     end
+    
 end
