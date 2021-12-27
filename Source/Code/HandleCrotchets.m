@@ -30,6 +30,9 @@ function [result1, result2] = HandleCrotchets(stave_section, stafflines_locs)
     
     %% Finding the filled note heads
     stave_section = imclose(stave_section, strel('disk', 1));
+    if size(stave_section, 2) < 600 % image width must be suitable
+        stave_section = bwareafilt(stave_section, [10, 50]);
+    end
     stave_section = bwareaopen(stave_section, 15);
     stave_section = apply_morphological(stave_section, 'close', 'square', 3);
     

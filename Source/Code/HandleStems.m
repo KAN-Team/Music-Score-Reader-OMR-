@@ -12,8 +12,12 @@ function [result1, result2, result3] = HandleStems(stave_section, dis_btw_2_stv_
     %}
 
     %% Finding the stems from the vertical projection
+    ratio = 1/3;
+    if size(stave_section, 2) < 600
+        ratio = 2/3;
+    end
     scan_line = sum(stave_section, 1);
-    scan_filtered = (scan_line > dis_btw_2_stv_lines * 1/3);
+    scan_filtered = (scan_line > dis_btw_2_stv_lines * ratio);
     [stem_peak_vals, stem_peak_locs, stem_peak_width] = findpeaks(double(scan_filtered));
     
     global display_figures stave

@@ -7,7 +7,7 @@ function Main()
     isRotated = false;
     
     %% Reading Image
-    original_image = imread('TwinkleTwinkleLittleStar.bmp'); % TwinkleTwinkleLittleStar.bmp % JingleBells.bmp
+    original_image = imread('JingleBells.bmp'); % TwinkleTwinkleLittleStar.bmp % JingleBells.bmp
 
     % Greying Image
     if (ndims(original_image) == 3)

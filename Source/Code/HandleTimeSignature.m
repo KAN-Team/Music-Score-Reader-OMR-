@@ -22,6 +22,17 @@ function [result, result2] = HandleTimeSignature(stave_section)
         time_sig_img = imread('Segments/TS_e.tiff');
         % maxC = max(C(:))  % to determine threshold value...
         thresh = 58;        % a bit smaller than maxC...
+        [detected_time_sig, isFound] = FFTransform(stave_section, time_sig_img, thresh, "TimeSignature");
+
+        TimeSignature = 'e/4';
+    end
+    
+    %% Fast-Fourier Transformation for another e/4 time signature
+    if (isFound == false)
+        time_sig_img = imread('Segments/TS_e_2.tiff');
+        % C = real(ifft2(fft2(stave_section) .* fft2(rot90(time_sig_img,2), size(stave_section,1), size(stave_section,2))));
+        % maxC = max(C(:))  % to determine threshold value...
+        thresh = 25;        % a bit smaller than maxC...
         [detected_time_sig] = FFTransform(stave_section, time_sig_img, thresh, "TimeSignature");
 
         TimeSignature = 'e/4';

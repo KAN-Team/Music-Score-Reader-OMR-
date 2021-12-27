@@ -23,10 +23,19 @@ function result = HandleClef(stave_section)
 
      %% Fast-Fourier Transformation for another clef shape / Al-Moftah Al-Mosiqi
      if ~isFound
+         clef_img = imread('Segments/Clef_3.tiff');
+         % C = real(ifft2(fft2(stave_section) .* fft2(rot90(clef_img,2), size(stave_section,1), size(stave_section,2))));
+         % maxC = max(C(:)) % to determine threshold value...
+         thresh = 104;    % a bit smaller than maxC...
+         [detected_clef, isFound] = FFTransform(stave_section, clef_img, thresh, "Clef");
+     end
+     
+     %% Fast-Fourier Transformation for another clef shape / Al-Moftah Al-Mosiqi
+     if ~isFound
          clef_img = imread('Segments/Clef_4.tiff');
          % C = real(ifft2(fft2(stave_section) .* fft2(rot90(clef_img,2), size(stave_section,1), size(stave_section,2))));
          % maxC = max(C(:)) % to determine threshold value...
-         thresh = 390;    % a bit smaller than maxC...
+         thresh = 395;    % a bit smaller than maxC...
          [detected_clef] = FFTransform(stave_section, clef_img, thresh, "Clef");
      end
      

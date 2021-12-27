@@ -35,7 +35,7 @@ function [result, result2] = HandleMinims(stave_section, stafflines_locs)
     [B, L] = bwboundaries(stave_section, 'noholes');
 
     stats = regionprops(L, 'Area', 'Centroid');
-    threshold = 0.8;
+    threshold = 0.82; % was 0.80
     minims = [];
     
     % looping over the boundaries
