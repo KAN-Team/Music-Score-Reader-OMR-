@@ -57,6 +57,15 @@ The created audio sample is located in the **TestCases** folder and it is export
 **`MATLAB`** is required in order to run the current project
 (2017 or later is preferable).
 
+### References
+
+- [VIP Helping Paper](https://publications.waset.org/10005799/automatic-music-score-recognition-system-using-digital-image-processing)
+- [Andy Zeng Trial for staff lines detection](http://andyzeng.github.io/omr.pdf)
+- [FFT-Based Correlation to Locate Image Features](https://www.mathworks.com/help/images/fourier-transform.html)
+- [Identifying round objects](https://www.mathworks.com/help/images/identifying-round-objects.html)
+- [Using Fundamental Frequency to play audio](https://www.mathworks.com/matlabcentral/fileexchange/65665-make-a-song?s_tid=prof_contriblnk)
+- [Image Orientation](https://www.mathworks.com/help/images/find-image-rotation-and-scale.html)
+
 #### Copyrights
 - Kareem S. Fathy
 - KAN Org.
