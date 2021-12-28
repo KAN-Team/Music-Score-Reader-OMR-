@@ -16,11 +16,19 @@ Also handles the oriented image.
 **`0. Preparations for the Process`** | **`1. Staff Lines Detection and Removal`** | **`2. Segmentation`** |
 | :-----------------------------------: | :-----------------------------------: | :-----------------------------------: |
 | <ul><li>Detect the image orientation.</li><li>Remove unwanted margins.</li><li>Getting Number of staves.</li></ul> | <ul><li>Detect the location of all staff lines.</li><li>Remove staff lines.</li><li>Fill in the gaps.</li></ul> | <ul><li>Process row by row.</li><li>Calculate boundaries for each symbol.</li><li>Extract Symbol.</li></ul> |
-
-**`3. Symbol Recognition`** <br> | **`4. Note Identification`**  | **`5. Music Transformation`** |
-| :-----------------------------------: | :-----------------------------------: | :-----------------------------------: |
+| **`3. Symbol Recognition`** <br> | **`4. Note Identification`**  | **`5. Music Transformation`** |
 | <ul><li>Calculate matching score against training data.</li><li>Minimum score threshold: **74%**.</li><li>Pick a label with a maximum score.</li></ul> | <ul><li>Calculate centre point coordinate.</li><li>Remove staff lines.</li><li>Use a recognition label to get the duration.</li></ul> | <ul><li>Generate sound data.</li><li>Play the song.</li></ul> |
 
+
+***
+
+### Some Runtime Screenshots
+
+| Annotated JingleBells | Annotated TwinkleTwinleLitterStar | Annotated BashSheet |
+| :--------: | :-------------------: | :-------------------------: |
+| <img src="Screenshots/Annotated%20JingleBells.png" height="300"/>| <img src="Screenshots/Annotated%20TwinkleTwinleLitterStar.png" height="300"/> | ![](.png)<img src="Screenshots/Annotated%20BashSheet.png" height="300"/> |
+| **Stave Section with BarLines** | **Stafflines Detection** | **Stave Section without BarLines** |
+| ![](Screenshots/1.%20With%20BarLines.png) | ![](Screenshots/0.%20Stafflines%20Detection.png)  | ![](Screenshots/2.%20Without%20BarLines.png) |
 
 ***
 
@@ -33,6 +41,8 @@ After inserting the correct image path into the `Main.m` and running it, a `reco
 
 The created audio sample is located in the **TestCases** folder and it is exported with the name **`GeneratedAudio.wav`**.
 
+***
+
 ### Prerequisites
 **`MATLAB`** is required in order to run the current project
 (2017 or later is preferable).
@@ -44,6 +54,7 @@ The created audio sample is located in the **TestCases** folder and it is export
 - [Identifying round objects](https://www.mathworks.com/help/images/identifying-round-objects.html)
 - [Using Fundamental Frequency to play audio](https://www.mathworks.com/matlabcentral/fileexchange/65665-make-a-song?s_tid=prof_contriblnk)
 - [Image Orientation](https://www.mathworks.com/help/images/find-image-rotation-and-scale.html)
+- [Text Annotation](https://www.mathworks.com/help/matlab/ref/text.html)
 
 #### Copyrights
 - Kareem S. Fathy
