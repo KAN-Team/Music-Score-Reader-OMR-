@@ -82,6 +82,6 @@ function recognizedScore = ProcessStaves(gray_image)
                                          recg_crotchets, recg_minims);
     end
     
-    % Generate annotated image
+    % Generating annotated image
     SetBounds(binarized_image, recognizedScore, stafflines_locs, stave_section_space);
 end

@@ -80,8 +80,7 @@ end
 % The purpose of using getKey is to achieve a fade-in/fade-out effect 
 % in combination with the creation of the audio wave, 
 % based on the sinusoids (sine waves).
-function wave = getKey(p, n, fs)
-    
+function wave = getKey(p, n, fs)  
         t = 0:1/fs:4/n;
         idx = 440*2^((p-49)/12);
         mid = (t(1)+t(end))/2;
