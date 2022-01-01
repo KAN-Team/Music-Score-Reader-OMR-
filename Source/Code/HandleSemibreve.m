@@ -27,7 +27,7 @@ function [result, result2] = HandleSemibreve(stave_section, stafflines_locs)
 
     %% Fast-Fourier Transformation for the semibreve notes
     % figure, imshow(stave_section); title("BEFORE");
-    semibreve_img = imread('Segments/Semibreve.tiff');
+    semibreve_img = imread('C:\Users\LENOVO\OneDrive\Documents\githup\GUI\Music-Score-Reader-OMR-\Source\Segments\Semibreve.tiff');
     % maxC = max(C(:))  % to determine threshold value...
     thresh = 58.9;        % a bit smaller than maxC...
     [detected_semibreve_note] = FFTransform(stave_section, semibreve_img, thresh, "Semibreve");

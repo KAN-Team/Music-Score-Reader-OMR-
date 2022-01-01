@@ -9,10 +9,15 @@ function result = ContainsNotes(stave_section)
     %}
 
     %%
+    global isRotated
     total_pixels = size(stave_section, 1) * size(stave_section, 2);
     white_pixels = nnz(stave_section);
     white_pixels_percent = (white_pixels/total_pixels * 100);
-    if (white_pixels_percent < 12)
+    thresh = 12;
+    if (isRotated)
+        thresh = 15; 
+    end
+    if (white_pixels_percent < thresh)
         result = 0;
     else 
         result = 1;

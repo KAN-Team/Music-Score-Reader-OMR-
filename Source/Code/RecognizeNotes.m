@@ -38,41 +38,41 @@ function result = RecognizeNotes(notes, stafflines_locs, dim)
         idx = knnsearch(notePositions(:), notes(i, dim));
         switch idx
             case 1
-                notations(i)={'6'}; notations(i,2)={'C'};   % abv ln 1
+                notations(i)={'C'}; notations(i,2)={'6'};   % abv ln 1
             case 2
-                notations(i)={'5'}; notations(i,2)={'B'};   % abv ln 1
+                notations(i)={'B'}; notations(i,2)={'5'};   % abv ln 1
             case 3
-                notations(i)={'5'}; notations(i,2)={'A'};   % abv ln 1
+                notations(i)={'A'}; notations(i,2)={'5'};   % abv ln 1
             case 4
-                notations(i)={'5'}; notations(i,2)={'G'};   % abv ln 1
+                notations(i)={'G'}; notations(i,2)={'5'};   % abv ln 1
             case 5
-                notations(i)={'5'}; notations(i,2)={'F'};   % ln 1
+                notations(i)={'F'}; notations(i,2)={'5'};   % ln 1
             case 6
-                notations(i)={'5'}; notations(i,2)={'E'};   % ln 1 : ln 2
+                notations(i)={'E'}; notations(i,2)={'5'};   % ln 1 : ln 2
             case 7
-                notations(i)={'5'}; notations(i,2)={'D'};   % ln 2
+                notations(i)={'D'}; notations(i,2)={'5'};   % ln 2
             case 8
-                notations(i)={'5'}; notations(i,2)={'C'};   % ln 2 : ln 3
+                notations(i)={'C'}; notations(i,2)={'5'};   % ln 2 : ln 3
             case 9
-                notations(i)={'4'};  notations(i,2)={'B'};  % ln 3
+                notations(i)={'B'}; notations(i,2)={'4'};   % ln 3
             case 10
-                notations(i)={'4'};  notations(i,2)={'A'};  % ln 3 : ln 4 
+                notations(i)={'A'}; notations(i,2)={'4'};   % ln 3 : ln 4 
             case 11
-                notations(i)={'4'}; notations(i,2)={'G'};   % ln 4
+                notations(i)={'G'}; notations(i,2)={'4'};   % ln 4
             case 12
-                notations(i)={'4'};  notations(i,2)={'F'};  % ln 4 : ln 5
+                notations(i)={'F'}; notations(i,2)={'4'};   % ln 4 : ln 5
             case 13
-                notations(i)={'4'};  notations(i,2)={'E'};  % ln 5
+                notations(i)={'E'}; notations(i,2)={'4'};   % ln 5
             case 14
-                notations(i)={'4'}; notations(i,2)={'D'};   % blw ln 5
+                notations(i)={'D'}; notations(i,2)={'4'};   % blw ln 5
             case 15
-                notations(i)={'4'}; notations(i,2)={'C'};   % blw ln 5
+                notations(i)={'C'}; notations(i,2)={'4'};   % blw ln 5
             case 16
-                notations(i)={'3'}; notations(i,2)={'B'};   % blw ln 5
+                notations(i)={'B'}; notations(i,2)={'3'};   % blw ln 5
             case 17
-                notations(i)={'3'}; notations(i,2)={'A'};   % blw ln 5
+                notations(i)={'A'}; notations(i,2)={'3'};   % blw ln 5
             case 18
-                notations(i)={'3'}; notations(i,2)={'G'};   % blw ln 5
+                notations(i)={'G'}; notations(i,2)={'3'};   % blw ln 5
         end
     end
     

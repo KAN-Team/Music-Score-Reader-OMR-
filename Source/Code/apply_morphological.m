@@ -6,14 +6,14 @@ function result = apply_morphological(image, morph_type, SE_shape, r)
         and the shape of any type ('square' - 'disk' - 'line', etc...),
         and finally the r param which is the shape radius length.
         
-        [N.B] Image width must be less than 700 pixels to apply.
+        [N.B] Image width must be in 600:700 pixels to apply.
 
         @Author Kareem Sherif
         @Copyright 12-2021 The KAN, Org.
     %}
     
     %% image must be in a gray scale or a binary...
-    if (size(image, 2) > 700) % image width must be suitable...
+    if (size(image, 2) > 700 || size(image, 2) < 600) % image width must be suitable...
         result = image;
     elseif (strcmp(morph_type, 'open'))
         result = imopen(image, strel(SE_shape, r));

@@ -21,6 +21,7 @@ function fixed_image = HandleRotation(gray_image)
         
         [N.B] This pice of code was introduced by Amir Omidvarnia
         in "Image Rotation Correction" at MATLAB Central File Exchange.
+
         @Author Kareem Sherif
         @Copyright 12-2021 The KAN, Org.
     %}

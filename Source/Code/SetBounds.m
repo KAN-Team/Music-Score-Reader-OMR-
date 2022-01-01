@@ -2,6 +2,7 @@ function SetBounds(binarized_image, recognizedScore, stafflines_locs, stave_sect
     %{
       SET_BOUNDS Custom objects' bounds and annotation generation.
         It takes the image and the recognizedScore matrix.
+
         It Displays an annotated figure contating objects' boundaries
         and each object notation.
         

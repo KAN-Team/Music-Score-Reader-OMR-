@@ -7,7 +7,7 @@ function [result1, result2] = HandleBarLines(stave_section)
         the distance between any two consecutive staff lines 
         in the same section. 
 
-        @Author Kareem Sherif
+        @Author Nada Anies
         @Copyright 12-2021 The KAN, Org.
     %}
 
@@ -19,13 +19,19 @@ function [result1, result2] = HandleBarLines(stave_section)
         bar(vertical_projection); 
         title(char("Stave Section #" + stave + " : Vertical Projection of the Stave WITH the Bar Lines"))
     end
-    dis_btw_2_stv_lines = vertical_projection(find(vertical_projection, 1, 'last'));
     
-    bar_pos = find(vertical_projection>dis_btw_2_stv_lines-2);
+    if size(stave_section, 2) < 600 % image width must be suitable
+        dis_btw_2_stv_lines = vertical_projection(find(vertical_projection, 1, 'last'));
+        bar_pos = find(vertical_projection==dis_btw_2_stv_lines);
+        % Excluding the bars from the vertical projection
+        vertical_projection(vertical_projection==dis_btw_2_stv_lines) = 0;
+    else
+        dis_btw_2_stv_lines = vertical_projection(find(vertical_projection, 1, 'last'));
+        bar_pos = find(vertical_projection>dis_btw_2_stv_lines-2);
+        % Excluding the bars from the vertical projection
+        vertical_projection(vertical_projection>dis_btw_2_stv_lines-2) = 0;
+    end
     
-    % Excluding the bars from the vertical projection
-    vertical_projection(vertical_projection>dis_btw_2_stv_lines-2) = 0;
-
     %% Plotting the vertical projection without the bar lines
     if (display_figures)
         figure('name', 'VISUALIZATION');
