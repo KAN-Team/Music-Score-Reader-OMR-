@@ -4,7 +4,7 @@ function [result, result2] = HandleTimeSignature(stave_section)
         It returns the binarized image without the time signature
         and the recognized time object.
 
-        @Author Kareem Saeed
+        @Author Kareem Sherif
         @Copyright 12-2021 The KAN, Org.
     %}
 

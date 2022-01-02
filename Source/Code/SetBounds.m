@@ -6,7 +6,7 @@ function SetBounds(binarized_image, recognizedScore, stafflines_locs, stave_sect
         It Displays an annotated figure contating objects' boundaries
         and each object notation.
         
-        @Author Nada Anies
+        @Author Kareem Sherif
         @Copyright 12-2021 The KAN, Org.
     %}
 

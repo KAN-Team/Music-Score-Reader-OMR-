@@ -7,7 +7,7 @@ function [result1, result2] = HandleBarLines(stave_section)
         the distance between any two consecutive staff lines 
         in the same section. 
 
-        @Author Nada Anies
+        @Author Kareem Sherif
         @Copyright 12-2021 The KAN, Org.
     %}
 

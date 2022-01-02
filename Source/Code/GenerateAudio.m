@@ -19,7 +19,7 @@ function generated_audio = GenerateAudio(recognizedScore)
         [N.B]   The getKey code is introduced by Yi-Wen Chen and it is 
                 included in the MathWorks File Exchange Repository.
 
-        @Author Nada Mohamed
+        @Author Kareem Sherif
         @Copyright 12-2021 The KAN, Org.
     %}
     

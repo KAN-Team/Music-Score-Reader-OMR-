@@ -2,7 +2,7 @@ function peak_locs = DetectStafflines(binarized_image)
     %{
       DETECT_STAFFLINES Gets the locations of the stave_lines.
         
-        @Author Nada Anies
+        @Author Kareem Sherif
         @Copyright 12-2021 The KAN, Org.
     %}
     

@@ -3,7 +3,7 @@ function result = HandleClef(stave_section)
       HANDLE_CLEF Detects and Removes musical clef.
         It returns the binarized image without the clef.
 
-        @Author Kareem Saeed
+        @Author Kareem Sherif
         @Copyright 12-2021 The KAN, Org.
     %}
 
