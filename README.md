@@ -28,8 +28,8 @@ Also handles the orientated images.
 | Annotated JingleBells | Annotated TwinkleTwinleLitterStar | Annotated BashSheet |
 | :--------: | :-------------------: | :-------------------------: |
 | <img src="Screenshots/Annotated%20JingleBells.png" height="300"/>| <img src="Screenshots/Annotated%20TwinkleTwinleLitterStar.png" height="300"/> | ![](.png)<img src="Screenshots/Annotated%20BashSheet.png" height="300"/> |
-| **Stave Section with BarLines** | **Stafflines Detection** | **Stave Section without BarLines** |
-| ![](Screenshots/1.%20With%20BarLines.png) | ![](Screenshots/0.%20Stafflines%20Detection.png)  | ![](Screenshots/2.%20Without%20BarLines.png) |
+| **Stave Section with the BarLines** | **Stafflines Detection** | **Stave Section with the Stems** |
+| ![](Screenshots/6.%20Vertical%20Projection%20With%20BarLines.png) | ![](Screenshots/0.%20Stafflines%20Detection.png)  | ![](Screenshots/9.%20Vertical%20Projection%20of%20the%20Stems.png) |
 
 
 ***
