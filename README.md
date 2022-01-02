@@ -6,8 +6,9 @@ For example, a novice musician could use such a tool to hear what a selected pie
 
 Ideally, an OMR, given an image of a simple or complex music sheet, automatically identifies the notes and plays the musical piece. <br>
 For this project, the goal is to develop an algorithm to parse music sheet images, <br>
-produce the associated annotation, and implement a playback mechanism for the parsed musical notes.
-Also handles the oriented image.
+
+produce the associated annotation, and implement a playback mechanism for the parsed musical notes. <br>
+Also handles the orientated images.
 
 ***
 ## Process Overview
@@ -29,6 +30,7 @@ Also handles the oriented image.
 | <img src="Screenshots/Annotated%20JingleBells.png" height="300"/>| <img src="Screenshots/Annotated%20TwinkleTwinleLitterStar.png" height="300"/> | ![](.png)<img src="Screenshots/Annotated%20BashSheet.png" height="300"/> |
 | **Stave Section with BarLines** | **Stafflines Detection** | **Stave Section without BarLines** |
 | ![](Screenshots/1.%20With%20BarLines.png) | ![](Screenshots/0.%20Stafflines%20Detection.png)  | ![](Screenshots/2.%20Without%20BarLines.png) |
+
 
 ***
 
