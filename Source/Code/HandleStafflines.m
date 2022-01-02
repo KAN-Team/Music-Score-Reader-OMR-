@@ -6,7 +6,7 @@ function [binarized_img_withoutlines, stafflines_locs] = HandleStafflines(stave_
         It returns the binarized image without the staff lines and
         the staff lines locations in the specified section. 
 
-        @Author Kareem Sherif
+        @Author Nada Anies
         @Copyright 12-2021 The KAN, Org.
     %}
 
@@ -14,7 +14,7 @@ function [binarized_img_withoutlines, stafflines_locs] = HandleStafflines(stave_
     stafflines_locs = DetectStafflines(stave_section);
     
     %% Removing the stave lines
-    % Drawing white lines with a specific line width could not work eficiently.
+    % Drawing black lines with a specific line width could not work eficiently.
     % So, I change the binary value of the appropriate pixels of the bw image.
     binarized_img_withoutlines = stave_section;
     for i=1 : size(stafflines_locs)

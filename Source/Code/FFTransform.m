@@ -13,7 +13,7 @@ function [detected_signature, isFound] = FFTransform(stave_section, seg_img, thr
                 "FFT-Based Correlation to Locate Image Features" 
                 Tutorial from MathWorks.
 
-        @Author Kareem Sherif
+        @Author Kareem Saeed
         @Copyright 12-2021 The KAN, Org.
     %}
 

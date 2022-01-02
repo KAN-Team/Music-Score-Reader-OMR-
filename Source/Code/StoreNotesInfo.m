@@ -15,9 +15,11 @@ function result = StoreNotesInfo(recognizedScore, recognizedSemibreve, ...
     %}
 
     %% Creating a matrix including all the notes and their information
+    global stave
     recognisedStaveNotes = [recognizedSemibreve; recognizedCrotchets; recognizedMinims];
     recognisedStaveNotes = sortrows(recognisedStaveNotes, 1);
-    global stave
+    recognisedStaveNotes = [recognisedStaveNotes repmat({stave}, size(recognisedStaveNotes,1),1)];
+    
     if stave == 1
         recognizedScore = recognisedStaveNotes;
     else

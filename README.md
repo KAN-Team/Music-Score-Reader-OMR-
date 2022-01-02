@@ -6,6 +6,7 @@ For example, a novice musician could use such a tool to hear what a selected pie
 
 Ideally, an OMR, given an image of a simple or complex music sheet, automatically identifies the notes and plays the musical piece. <br>
 For this project, the goal is to develop an algorithm to parse music sheet images, <br>
+
 produce the associated annotation, and implement a playback mechanism for the parsed musical notes. <br>
 Also handles the orientated images.
 
@@ -13,34 +14,23 @@ Also handles the orientated images.
 ## Process Overview
 <b> The process is broken down into the following tasks: </b>
 
-**`0. Preparations for the Process`** <br>
-- Detect the image orientation.
-- Remove unwanted margins.
-- Getting number of staves.
+**`0. Preparations for the Process`** | **`1. Staff Lines Detection and Removal`** | **`2. Segmentation`** |
+| :-----------------------------------: | :-----------------------------------: | :-----------------------------------: |
+| <ul><li>Detect the image orientation.</li><li>Remove unwanted margins.</li><li>Getting Number of staves.</li></ul> | <ul><li>Detect the location of all staff lines.</li><li>Remove staff lines.</li><li>Fill in the gaps.</li></ul> | <ul><li>Process row by row.</li><li>Calculate boundaries for each symbol.</li><li>Extract Symbol.</li></ul> |
+| **`3. Symbol Recognition`** <br> | **`4. Note Identification`**  | **`5. Music Transformation`** |
+| <ul><li>Calculate matching score against training data.</li><li>Minimum score threshold: **74%**.</li><li>Pick a label with a maximum score.</li></ul> | <ul><li>Calculate centre point coordinate.</li><li>Remove staff lines.</li><li>Use a recognition label to get the duration.</li></ul> | <ul><li>Generate sound data.</li><li>Play the song.</li></ul> |
 
-**`1. Staff Lines Detection and Removal`** <br>
-- Detect the location of all staff lines.
-- Remove staff lines.
-- Fill in the gaps.
 
-**`2. Segmentation`** <br>
-- Process row by row.
-- Calculate boundaries for each symbol.
-- Extract Symbol.
+***
 
-**`3. Symbol Recognition`** <br>
-- Calculate matching score against each training data.
-- Minimum score threshold: **74%**.
-- Pick a label with a maximum score.
+### Some Runtime Screenshots
 
-**`4. Note Identification`** <br>
-- Calculate centre point coordinate.
-- Compare with staff lines coordinates to get the pitch.
-- Use a recognition label to get the duration.
-     
-**`5. Music Transformation`** <br> 
-- Generate sound data.
-- Play the song.
+| Annotated JingleBells | Annotated TwinkleTwinleLitterStar | Annotated BashSheet |
+| :--------: | :-------------------: | :-------------------------: |
+| <img src="Screenshots/Annotated%20JingleBells.png" height="300"/>| <img src="Screenshots/Annotated%20TwinkleTwinleLitterStar.png" height="300"/> | ![](.png)<img src="Screenshots/Annotated%20BashSheet.png" height="300"/> |
+| **Stave Section with BarLines** | **Stafflines Detection** | **Stave Section without BarLines** |
+| ![](Screenshots/1.%20With%20BarLines.png) | ![](Screenshots/0.%20Stafflines%20Detection.png)  | ![](Screenshots/2.%20Without%20BarLines.png) |
+
 
 ***
 
@@ -53,18 +43,21 @@ After inserting the correct image path into the `Main.m` and running it, a `reco
 
 The created audio sample is located in the **TestCases** folder and it is exported with the name **`GeneratedAudio.wav`**.
 
+***
+
 ### Prerequisites
 **`MATLAB`** is required in order to run the current project
 (2017 or later is preferable).
 
 ### References
-
 - [VIP Helping Paper](https://publications.waset.org/10005799/automatic-music-score-recognition-system-using-digital-image-processing)
 - [Andy Zeng Trial for staff lines detection](http://andyzeng.github.io/omr.pdf)
 - [FFT-Based Correlation to Locate Image Features](https://www.mathworks.com/help/images/fourier-transform.html)
 - [Identifying round objects](https://www.mathworks.com/help/images/identifying-round-objects.html)
+- [Piano key frequencies](https://en.wikipedia.org/wiki/Piano_key_frequencies)
 - [Using Fundamental Frequency to play audio](https://www.mathworks.com/matlabcentral/fileexchange/65665-make-a-song?s_tid=prof_contriblnk)
 - [Image Orientation](https://www.mathworks.com/help/images/find-image-rotation-and-scale.html)
+- [Text Annotation](https://www.mathworks.com/help/matlab/ref/text.html)
 
 #### Copyrights
 - Kareem S. Fathy

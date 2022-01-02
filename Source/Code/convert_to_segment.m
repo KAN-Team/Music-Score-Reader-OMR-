@@ -5,7 +5,7 @@ function convert_to_segment()
             [N.B] This function is completely independent of 
                   the main program, it runs individually.
 
-        @Author Kareem Sherif
+        @Author Kareem Saeed
         @Copyright 12-2021 The KAN, Org.
     %}
     %% Converting to segments...
