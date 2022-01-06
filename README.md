@@ -43,6 +43,8 @@ After inserting the correct image path into the `Main.m` and running it, a `reco
 
 The created audio sample is located in the **TestCases** folder and it is exported with the name **`GeneratedAudio.wav`**.
 
+### Future Plans
+Deploying a **stand-alone** application **(.exe)** with a Simple **`GUI`** that works **dynamically** with a large number of score sheets.
 ***
 
 ### Prerequisites
