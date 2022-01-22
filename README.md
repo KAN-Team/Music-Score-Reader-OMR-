@@ -18,7 +18,7 @@ Also handles the orientated images.
 | :-----------------------------------: | :-----------------------------------: | :-----------------------------------: |
 | <ul><li>Detect the image orientation.</li><li>Remove unwanted margins.</li><li>Getting Number of staves.</li></ul> | <ul><li>Detect the location of all staff lines.</li><li>Remove staff lines.</li><li>Fill in the gaps.</li></ul> | <ul><li>Process row by row.</li><li>Calculate boundaries for each symbol.</li><li>Extract Symbol.</li></ul> |
 | **`3. Symbol Recognition`** <br> | **`4. Note Identification`**  | **`5. Music Transformation`** |
-| <ul><li>Calculate matching score against training data.</li><li>Minimum score threshold: **74%**.</li><li>Pick a label with a maximum score.</li></ul> | <ul><li>Calculate centre point coordinate.</li><li>Remove staff lines.</li><li>Use a recognition label to get the duration.</li></ul> | <ul><li>Generate sound data.</li><li>Play the song.</li></ul> |
+| <ul><li>Calculate matching score against training data.</li><li>Minimum score threshold: **74%**.</li><li>Pick a label with a maximum score.</li></ul> | <ul><li>Calculate centre point coordinate.</li><li>Compare with staff lines coordinates to get the pitch.</li><li>Use a recognition label to get the duration.</li></ul> | <ul><li>Generate sound data.</li><li>Play the song.</li></ul> |
 
 
 ***
